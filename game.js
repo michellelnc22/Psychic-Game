@@ -7,11 +7,6 @@ var userLosses = 0;
 var guessesLeft = 10;
 var usedletters= [];
 
-var wins = document.getElementById("wins"); 
-var losses = document.getElementById("losses"); 
-var guesses = document.getElementById("guesses-left"); 
-var yourGuesses = doucment.getElementById("your-guesses"); 
-
 function reset () {
     guessesLeft = 10; 
     usedLetters = []; 
@@ -20,32 +15,28 @@ function reset () {
 
 document.onkeyup = function(event) {
 
-    var computerGuess = Math.floor(Math.random() * letterBank.length); 
+    var computerGuess = letterBank[Math.floor(Math.random() * letterBank.length)]; 
     var userGuess = event.key; 
-    userGuess.push(usedLetters); 
+   
 
     if (userGuess === computerGuess) {
         userWins++; 
-        guessesLeft = 10; 
-        usedLetters = []; 
         reset (); 
-    };
+    }else{
+            guessesLeft--;
+            usedLetters.push("your-guesses"); 
+            document.getElementById("your-guesses").innerHTML = usedLetters; 
+        }
 
-
-
-   if (userGuess !== computerGuess) {
-       userLosses--;
-       gussesLeft--; 
-   };
 
    if (guessesLeft == 0) {
+       userLosses --; 
        reset (); 
    };
 
-   document.getElementById("#wins").innerHTML = "Wins: " + userWins; 
-   document.getElementById("#losses").innerHTML = "Losses: " + userLosses; 
-   document.getElementById("#guesses-left").innerHTML = "Guesses Left: " = guessesLeft; 
-   document.getElementById("#your-guesses").innerHTML= "Your Gusses so Far: " = usedLetters; 
+   document.getElementById("wins").innerHTML = "Wins: " + userWins; 
+   document.getElementById("losses").innerHTML = "Losses: " + userLosses; 
+   document.getElementById("guesses-left").innerHTML = "Guesses Left: " + guessesLeft; 
 
 
 }; 
