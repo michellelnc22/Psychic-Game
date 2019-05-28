@@ -5,7 +5,7 @@ var letterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 var userWins = 0;
 var userLosses = 0;
 var guessesLeft = 10;
-var usedletters= [];
+var usedLetters= [];
 
 function reset () {
     guessesLeft = 10; 
@@ -13,24 +13,32 @@ function reset () {
 
 }
 
+
+var computerGuess = letterBank[Math.floor(Math.random() * letterBank.length)];
+console.log(computerGuess);  
+
 document.onkeyup = function(event) {
 
-    var computerGuess = letterBank[Math.floor(Math.random() * letterBank.length)]; 
+    
     var userGuess = event.key; 
    
 
     if (userGuess === computerGuess) {
         userWins++; 
+        alert("You won!"); 
+        alert("Resetting game"); 
         reset (); 
     }else{
             guessesLeft--;
-            usedLetters.push("your-guesses"); 
-            document.getElementById("your-guesses").innerHTML = usedLetters; 
+            usedLetters.push(userGuess); 
+            document.getElementById("your-guesses").innerHTML = "Your Guesses So Far: " + usedLetters; 
         }
 
 
    if (guessesLeft == 0) {
-       userLosses --; 
+       userLosses ++; 
+       alert("You lose!"); 
+       alert("Resetting game"); 
        reset (); 
    };
 
